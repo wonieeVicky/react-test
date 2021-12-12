@@ -51,3 +51,15 @@ test('on/off button has blue color', () => {
   const buttonElement = screen.getByTestId('on/off-button');
   expect(buttonElement).toHaveStyle({ backgroundColor: 'blue' });
 });
+
+test('Prevent the -, + button from being pressed when the on/off button is clicked', () => {
+  // App 컴포넌트를 렌더링 한다.
+  render(<App />);
+  // screen object를 이용해서 원하는 엘리먼트에 접근(접근할 때 ID로 접근)
+  const onOffButtonElement = screen.getByTestId('on/off-button');
+  // click onOffbuttonElement button
+  fireEvent.click(onOffButtonElement);
+  // screen object를 이용해서 원하는 엘리먼트에 접근(접근할 때 ID로 접근)
+  const plusButtonElement = screen.getByTestId('plus-button');
+  expect(plusButtonElement).toBeDisabled();
+});
