@@ -3,9 +3,10 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import { server } from './2-react-shop-test/mocks/server';
 
 // src/setupTests.js
-import { server } from './mocks/server';
+
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
 // Reset any request handlers that we may add during the tests,
