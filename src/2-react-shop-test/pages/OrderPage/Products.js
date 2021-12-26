@@ -9,8 +9,11 @@ function Products({ name, imagePath, updateItemCount }) {
     <div style={{ textAlign: 'center' }}>
       <img style={{ width: '75%' }} src={`http://localhost:5000/${imagePath}`} alt={`${name} product`} />
       <form style={{ marginTop: '10px' }}>
-        <label style={{ textAlign: 'right' }}>{name}</label>
+        <label htmlFor={name} style={{ textAlign: 'right' }}>
+          {name}
+        </label>
         <input
+          id={name}
           style={{ marginLeft: 7 }}
           type="number"
           name="quantity"
