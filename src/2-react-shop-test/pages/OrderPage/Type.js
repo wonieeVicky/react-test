@@ -31,14 +31,20 @@ export default function Type({ orderType }) {
   const ItemComponent = orderType === 'products' ? Products : Options;
 
   const optionItems = items.map((item) => (
-    <ItemComponent key={item.name} name={item.name} imagePath={item.imagePath} />
+    <ItemComponent
+      key={item.name}
+      name={item.name}
+      imagePath={item.imagePath}
+      // updateItemCount props
+      updateItemCount={(itemName, newItemCount) => updateItemCount(itemName, newItemCount, orderType)}
+    />
   ));
 
   return (
     <>
       <h2>주문 종류</h2>
       <p>하나의 가격</p>
-      <p>총 가격: </p>
+      <p>총 가격:</p>
       <div style={{ display: 'flex', flexDirection: orderType === 'options' && 'column' }}>{optionItems}</div>
     </>
   );
