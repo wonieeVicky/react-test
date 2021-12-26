@@ -1,10 +1,9 @@
-﻿import { render, screen } from '@testing-library/react';
+﻿import { render, screen } from '../../../test-utils';
 import userEvent from '@testing-library/user-event';
-import { OrderContextProvider } from '../../../contexts/OrderContext';
 import Type from '../Type';
 
 test("update product's total when products change", async () => {
-  render(<Type orderType="products" />, { wrapper: OrderContextProvider });
+  render(<Type orderType="products" />);
 
   // 여행 상품 가격은 0원부터 시작한다.
   const productsTotal = screen.getByText('총 가격:', { exact: false }); // 상품 총 가격: 뒤에 다른 텍스트가 있어도 값을 가져옴
