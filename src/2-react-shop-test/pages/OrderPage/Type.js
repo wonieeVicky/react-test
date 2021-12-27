@@ -1,5 +1,5 @@
 ﻿import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useMemo } from 'react';
 import ErrorBanner from '../../components/ErrorBanner';
 import { OrderContext } from '../../contexts/OrderContext';
 import Options from './Options';
@@ -9,6 +9,7 @@ export default function Type({ orderType }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
   const [orderDatas, updateItemCount] = useContext(OrderContext);
+  const orderTypeKorean = useMemo(() => (orderType === 'products' ? '상품' : '옵션'), [orderType]);
 
   useEffect(() => {
     loadItems(orderType);
@@ -44,7 +45,9 @@ export default function Type({ orderType }) {
     <>
       <h2>주문 종류</h2>
       <p>하나의 가격</p>
-      <p>총 가격:{orderDatas.totals[orderType]}</p>
+      <p>
+        {orderTypeKorean} 총 가격:{orderDatas.totals[orderType]}
+      </p>
       <div style={{ display: 'flex', flexDirection: orderType === 'options' && 'column' }}>{optionItems}</div>
     </>
   );
