@@ -6,7 +6,7 @@ test("update product's total when products change", async () => {
   render(<Type orderType="products" />);
 
   // 여행 상품 가격은 0원부터 시작한다.
-  const productsTotal = screen.getByText('총 가격:', { exact: false }); // 상품 총 가격: 뒤에 다른 텍스트가 있어도 값을 가져옴
+  const productsTotal = screen.getByText('상품 총 가격:', { exact: false }); // 상품 총 가격: 뒤에 다른 텍스트가 있어도 값을 가져옴
   expect(productsTotal).toHaveTextContent('0');
 
   // 아메리카 여행 상품 한 개 올리기
@@ -24,4 +24,28 @@ test("update product's total when products change", async () => {
   userEvent.clear(englandInput);
   userEvent.type(englandInput, '3');
   expect(productsTotal).toHaveTextContent('4000');
+});
+
+test("update option's total when options change", async () => {
+  render(<Type orderType="options" />);
+
+  // 옵션 총 가격이 0부터 시작
+  const optionsTotal = screen.getByText('옵션 총 가격:', { exact: false });
+  expect(optionsTotal).toHaveTextContent('0');
+
+  // 보험 옵션 추가
+  const insuranceCheckbox = await screen.findByRole('checkbox', {
+    name: 'Insurance',
+  });
+  userEvent.click(insuranceCheckbox);
+  expect(optionsTotal).toHaveTextContent('500');
+
+  // 디너 옵션 추가
+  const dinnerCheckbox = screen.getByRole('checkbox', { name: 'Dinner' });
+  userEvent.click(dinnerCheckbox);
+  expect(optionsTotal).toHaveTextContent('1000');
+
+  // 디너 옵션 제거
+  userEvent.click(dinnerCheckbox);
+  expect(optionsTotal).toHaveTextContent('500');
 });
