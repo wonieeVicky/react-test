@@ -20,10 +20,8 @@ const SummaryPage = ({ setStep }) => {
     const optionList = optionsArray.map((key) => <li key={key}>{key}</li>);
     optionRender = (
       <>
-        <h2>
-          옵션: {orderDatas.totals.options}
-          <ul>{optionList}</ul>
-        </h2>
+        <h2>옵션: {orderDatas.totals.options}</h2>
+        <ul>{optionList}</ul>
       </>
     );
   }
