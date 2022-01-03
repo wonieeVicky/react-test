@@ -1,6 +1,6 @@
 ﻿import userEvent from '@testing-library/user-event';
 import App from './App';
-const { render, screen } = require('@testing-library/react');
+const { render, screen, waitFor } = require('@testing-library/react');
 
 test('From order to order completion', async () => {
   // App 컴포넌트 안에는 이미 provider가 Wrap되어 있다.
@@ -72,4 +72,6 @@ test('From order to order completion', async () => {
   // 첫 페이지로 버튼 클릭
   const firstPageButton = screen.getByRole('button', { name: '첫페이지로' });
   userEvent.click(firstPageButton);
+
+  await screen.findByRole('spinbutton', { name: 'America' });
 });
