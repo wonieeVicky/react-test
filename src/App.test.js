@@ -73,5 +73,12 @@ test('From order to order completion', async () => {
   const firstPageButton = screen.getByRole('button', { name: '첫페이지로' });
   userEvent.click(firstPageButton);
 
+  // 여행 상품 총 가격 옵션 총 가격이 reset 되었는지 확인
+  const productsTotal = screen.getByText('상품 총 가격: 0');
+  expect(productsTotal).toBeInTheDocument();
+  const optionsTotal = screen.getByText('옵션 총 가격: 0');
+  expect(optionsTotal).toBeInTheDocument();
+
   await screen.findByRole('spinbutton', { name: 'America' });
+  await screen.findByRole('checkbox', { name: 'Insurance' });
 });
