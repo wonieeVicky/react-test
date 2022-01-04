@@ -4,7 +4,7 @@ import { OrderContext } from '../../contexts/OrderContext';
 import ErrorBanner from '../../components/ErrorBanner';
 
 function CompletePage({ setStep }) {
-  const [orderDatas] = useContext(OrderContext);
+  const [orderDatas, , resetOrderDatas] = useContext(OrderContext);
   const [orderHistory, setOrderHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -24,6 +24,13 @@ function CompletePage({ setStep }) {
   if (error) {
     return <ErrorBanner message="에러가 발생했습니다." />;
   }
+
+  const handleClick = () => {
+    // order data를 reset
+    resetOrderDatas();
+    // 첫 페이지로 보내기
+    setStep(0);
+  };
 
   const orderTable = orderHistory.map((item) => (
     <tr key={item.orderNumber}>
@@ -49,7 +56,7 @@ function CompletePage({ setStep }) {
           </tbody>
         </table>
         <br />
-        <button className="rainbow rainbow-1" onClick={() => setStep(0)}>
+        <button className="rainbow rainbow-1" onClick={handleClick}>
           첫페이지로
         </button>
       </div>
